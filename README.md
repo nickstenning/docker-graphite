@@ -38,6 +38,13 @@ graphite's metric database at `/data/graphite` on the host, you could use:
     docker run -v /data/graphite:/var/lib/graphite/storage/whisper \
                -d nickstenning/graphite
 
+Make sure that you assign the correct permissions to your volume directory, 
+so the graphite process can write to it. A simple
+
+    chmod 33:33 /data/graphite
+    
+should do it (33 is the default uid / gid of www-data on ubuntu)
+
 ### Technical details
 
 By default, this instance of carbon-cache uses the following retention periods
