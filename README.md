@@ -25,7 +25,7 @@ You can log into the administrative interface of graphite-web (a Django
 application) with the username `admin` and password `admin`. These passwords can
 be changed through the web interface.
 
-**NB**: Please be aware that by default docker will make the exposed ports
+**N.B.** Please be aware that by default docker will make the exposed ports
 accessible from anywhere if the host firewall is unconfigured.
 
 ### Data volumes
@@ -37,6 +37,10 @@ graphite's metric database at `/data/graphite` on the host, you could use:
 
     docker run -v /data/graphite:/var/lib/graphite/storage/whisper \
                -d nickstenning/graphite
+
+**N.B.** You will need to run the container with suitable permissions to write
+to the data volume directory. Carbon and the graphite webapp run as `www-data`
+inside the container, but this UID/GID may be mapped inconsistently on the host.
 
 ### Technical details
 
