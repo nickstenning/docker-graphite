@@ -27,13 +27,15 @@ run	chmod 0664 /var/lib/graphite/storage/graphite.db
 run	cd /var/lib/graphite/webapp/graphite && python manage.py syncdb --noinput
 
 # Nginx
-expose	:80
+expose	80
 # Carbon line receiver port
-expose	:2003
+expose	2003
+# Carbon UDP receiver port
+expose	2003/udp
 # Carbon pickle receiver port
-expose	:2004
+expose	2004
 # Carbon cache query port
-expose	:7002
+expose	7002
 
 cmd	["/usr/bin/supervisord"]
 
