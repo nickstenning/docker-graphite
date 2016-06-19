@@ -51,3 +51,14 @@ resulting in whisper files of approximately 2.5MiB.
 
 For more information, see [the
 repository](https://github.com/nickstenning/dockerfiles/tree/master/graphite).
+
+### Running on boot2docker
+If you want to store data in your home directory on the host you need to do the following
+
+* Create a directory to store the data (e.g. `/Users/<you>/docker/graphite`)
+* Set the permissions in boot2docker to allow www-run to access (comment by @sanros on https://github.com/boot2docker/boot2docker/issues/581)
+	* `boot2docker ssh`
+	* `sudo umount /Users`
+	* `sudo mount -t vboxsf -o uid=33,gid=33 Users /Users`
+* Start with the volume: `docker run --name graphite -p 8080:80 -p 2003:2003 -v /Users/<you>/docker/graphite:/var/lib/graphite/storage/whisper -d tilman/graphite`
+
